@@ -1,0 +1,38 @@
+#header a{
+	font-size: 30px;
+	font-weight: bolder;
+	margin-right: 30px;
+}
+#header{
+	margin-left:560px;
+}
+#header2{
+	margin-left:380px;
+}
+#body{
+	margin-left: 300px;
+	
+}
+#fooot-header{
+	
+	margin-top: 20px;
+	margin-left: 580px;
+}
+#fooot-end{
+	margin-top: 10px;
+	margin-left: 400px;
+	
+}
+#fooot-end li{
+	float:left;
+	margin-left:20px;
+	list-style: none;
+}
+#fooot-end ul{
+	height: 30px;
+	border: solid 1px black;
+	width: 440px;
+}
+.ss{
+	margin-left:550px;
+}

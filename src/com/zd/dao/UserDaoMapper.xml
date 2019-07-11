@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zd.dao.UserlDao">
+	<select id="selectUser" parameterType="userl" resultType="userl">
+		select*from userl where username=#{userName} and upassword=#{uPassword}
+	</select>
+	<!-- 添加用户 -->
+	<insert id="addUserl" parameterType="userl" >
+		insert into userl (username,upassword) values(#{userName},#{uPassword}) 
+	</insert>
+	<!-- 根据用户名查询 -->
+	<select id="queryEmpByName" parameterType="String" resultType="userl">
+		select*from userl where username=#{userName}
+	</select>
+</mapper>

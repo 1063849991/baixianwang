@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zd.dao.EmpDao">
+	<!-- 查询所有员工 -->
+	<select id="queryAllEmp" resultType="emp">
+		select*from emp
+	</select>
+	<!-- 根据id查询员工 -->
+	<select id="queryEmpById" parameterType="int" resultType="emp">
+		select*from emp where empno=#{empno}
+	</select>
+	<!-- 添加员工 -->
+	<insert id="addEmp" parameterType="emp">
+		insert into emp (empno,ename,job,mgr,hiredate,sal,comm,deptno,pic)
+		values(#{empno},#{ename},#{job},#{mgr},#{hiredate},#{sal},#{comm},#{deptno},#{pic}) 
+	</insert>
+	<!-- 根据工号删除员工 -->
+	<delete id="deleteEmpById" parameterType="int">
+		delete from emp where empno=#{empno}
+	</delete>
+	<!-- 修改员工 -->
+	<update id="updateEmp" parameterType="emp">
+		update emp 
+		<trim prefix="set" suffixOverrides=",">
+				<if test="empno!=null">
+					empno=#{empno},
+				</if>
+				<if test="ename!=null and ename!=''">
+					ename=#{ename},
+				</if>
+				<if test="job!=null and job!=''">
+					job=#{job},
+				</if>
+				<if test="mgr!=null">
+					mgr=#{mgr},
+				</if>
+				<if test="hiredate!=null">
+					hiredate=#{hiredate},
+				</if>
+				<if test="sal!=null and sal!=''">
+					sal=#{sal},
+				</if>
+				<if test="comm!=null and comm!=''">
+					comm=#{comm},
+				</if>
+				<if test="deptno!=null">
+					deptno=#{deptno},
+				</if>
+				<if test="pic!=null and pic!=''">
+					pic=#{pic},
+				</if>
+			</trim>
+			where empno=#{empno}
+	</update>
+	<!-- 查询符合要求记录总数 -->
+	 <select id="queryRowCount" parameterType="query" resultType="int">
+	 	select count(*) from emp
+	 		<!-- 会自动帮我们拼一个where关键字,并且会去掉对于and关键字 -->
+	 		<where>
+	 			<if test="qename!=null and qename!=''">
+	 				and ename like concat('%',concat(#{qename},'%'))
+	 			</if>
+	 			<if test="qdeptno!=null">
+	 				and deptno like concat('%',concat(#{qdeptno},'%'))
+	 			</if>
+	 		</where>
+	 </select>
+	 <!-- 分页查询 -->
+	 <select id="queryEmpByFy" parameterType="fy" resultType="emp">
+	 	select * from (select n.*,rownum r from (select * from emp
+	 		<where>
+	 			<if test="query!=null">
+	 				<if test="query.qename!=null and query.qename!=''">
+	 					and ename like concat('%',concat(#{query.qename},'%'))
+	 				</if>
+	 				<if test="query.qdeptno!=null">
+		 				and deptno like concat('%',concat(#{query.qdeptno},'%'))
+		 			</if>
+	 			</if>
+	 		</where>
+	 	)n) where r>#{startRow} and r<![CDATA[<]]>=#{endRow}
+	 </select>
+</mapper>

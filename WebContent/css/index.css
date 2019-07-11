@@ -1,0 +1,40 @@
+*{
+	margin: 0px;
+	padding: 0px;
+}
+#denglu{
+	width: 100%;
+	height: 200px;
+	margin: auto;
+	margin-top: 200px;
+	border: solid 1px #d6d5d6;
+	background-color: #d6d5d6;
+}
+label{
+            cursor: pointer;
+            display: inline-block;
+            padding: 3px 6px;
+            text-align: right;
+            width: 130px;
+            vertical-align: top;
+        }
+p{
+	margin-top: 20px;
+	margin-left: 530px;
+}
+.a1{
+	font-size: 13px;
+	color: blue;
+	margin-left: 50px;
+	text-decoration: none;
+}
+.a1:hover{
+	text-decoration: underline;
+}
+.a2{
+	margin-left: 570px;
+}
+span{
+	color: red;
+}
+
